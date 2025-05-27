@@ -1,4 +1,4 @@
-package com.dev.myninjaregister.ninjaregister1;
+package com.dev.myninjaregister.ninjaregister1.Ninjas;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
