@@ -18,6 +18,7 @@ public class NinjaModel {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private String name;
+    //só pode ter um com cada nome, não pode ser igual
     @Column(unique = true)
     private String email;
     private int age;
