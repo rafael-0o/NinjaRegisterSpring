@@ -1,6 +1,7 @@
 package com.dev.myninjaregister.ninjaregister1.Ninjas;
 
 import com.dev.myninjaregister.ninjaregister1.Missions.MissionsModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ public class NinjaModel {
     private String email;
     private int age;
     @ManyToOne
+
     @JoinColumn(name = "missoes_id")
     private MissionsModel mission;
 
