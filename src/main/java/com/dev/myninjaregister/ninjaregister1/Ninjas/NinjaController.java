@@ -21,24 +21,24 @@ public class NinjaController {
     }
 
     @PostMapping("/addninja")
-    public String addNewNinja(){
-        return "Ninja added";
+    public NinjaModel addNewNinja(@RequestBody NinjaModel ninja){
+        return ninjaService.createNewNinja(ninja);
     }
     @GetMapping("/showallninjas")
     public List<NinjaModel> showAllNinjas(){
         return ninjaService.showAllNinjas();
     }
-    @GetMapping("/ninjasbyid")
-    public String showNinjaById(){
-        return "Your specific ninja";
+    @GetMapping("/ninjasbyid/{id}")
+    public NinjaModel showNinjaById(@PathVariable Long id){
+        return ninjaService.showNinjaById(id);
     }
-    @PutMapping("/alterninjabyid")
-    public String  alterNinjaById(){
-        return "changed ninja";
+    @PutMapping("/alterninjabyid/{id}")
+    public NinjaModel  alterNinjaById(@PathVariable Long id ,@RequestBody NinjaModel attninja){
+        return ninjaService.alterNinja(id,attninja);
     }
-    @DeleteMapping("/deleteninjabyid")
-    public String deleteNinjaById(){
-        return "Ninja deleted";
+    @DeleteMapping("/deleteninjabyid/{id}")
+    public void deleteNinjaById(@PathVariable Long id){
+        ninjaService.deleteNinjaId(id);
     }
 
 }
