@@ -7,7 +7,7 @@ import java.util.List;
 
 @Controller
 @RestController
-@RequestMapping
+@RequestMapping("/api/ninjas")
 public class NinjaController {
     private NinjaService ninjaService;
 
@@ -20,23 +20,23 @@ public class NinjaController {
         return "Wellcome in my first spring page!";
     }
 
-    @PostMapping("/addninja")
-    public NinjaModel addNewNinja(@RequestBody NinjaModel ninja){
+    @PostMapping("/create")
+    public NinjaDTO addNewNinja(@RequestBody NinjaDTO ninja){
         return ninjaService.createNewNinja(ninja);
     }
-    @GetMapping("/showallninjas")
-    public List<NinjaModel> showAllNinjas(){
+    @GetMapping("/showall")
+    public List<NinjaDTO> showAllNinjas(){
         return ninjaService.showAllNinjas();
     }
-    @GetMapping("/ninjasbyid/{id}")
-    public NinjaModel showNinjaById(@PathVariable Long id){
+    @GetMapping("/showbyid/{id}")
+    public NinjaDTO showNinjaById(@PathVariable Long id){
         return ninjaService.showNinjaById(id);
     }
-    @PutMapping("/alterninjabyid/{id}")
-    public NinjaModel  alterNinjaById(@PathVariable Long id ,@RequestBody NinjaModel attninja){
-        return ninjaService.alterNinja(id,attninja);
+    @PutMapping("/editbyid/{id}")
+    public NinjaDTO  alterNinjaById(@PathVariable Long id ,@RequestBody NinjaDTO updateNinja){
+        return ninjaService.alterNinja(id,updateNinja);
     }
-    @DeleteMapping("/deleteninjabyid/{id}")
+    @DeleteMapping("/deletebyid/{id}")
     public void deleteNinjaById(@PathVariable Long id){
         ninjaService.deleteNinjaId(id);
     }
