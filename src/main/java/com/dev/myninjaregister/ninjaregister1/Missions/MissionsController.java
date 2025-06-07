@@ -4,36 +4,37 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@Controller
+
 @RestController
 @RequestMapping("/api/missions")
 public class MissionsController {
     private MissionsService missionsService;
-    private final MissionsRepository missionsRepository;
 
-    public MissionsController(MissionsService missionsService,
-                              MissionsRepository missionsRepository) {
+    public MissionsController(MissionsService missionsService) {
         this.missionsService = missionsService;
-        this.missionsRepository = missionsRepository;
     }
-    @PostMapping("/createmission")
-    public MissionsModel createMission(@RequestBody MissionsModel mission){
-        return missionsRepository.save(mission);
+
+    @PostMapping("/create")
+    public MissionsDTO createMission(@RequestBody MissionsDTO mission){
+        return missionsService.createNewMission(mission);
     }
-    @GetMapping("/showmissions")
-    public List<MissionsModel> showAllMissions(){
+    @GetMapping("/showall")
+    public List<MissionsDTO> showAllMissions(){
         return missionsService.showAllMissions();
     }
-    @GetMapping("/showmissionsbyid/{id}")
-    public MissionsModel showMissionById(@PathVariable Long id){
+    @GetMapping("/showbyid/{id}")
+    public MissionsDTO showMissionById(@PathVariable Long id){
         return missionsService.showMissionsById(id);
     }
-    @PutMapping("/updatemission")
-    public String updateMission(){
-        return "Mission Updated";
+
+    @PutMapping("/editbyid/{id}")
+    public MissionsDTO updateMission(@PathVariable Long id, @RequestBody MissionsDTO attmission){
+        return missionsService.modifyMission(id,attmission);
     }
-    @DeleteMapping("/deletemissionbyid/{id}")
+
+    @DeleteMapping("/deletebyid/{id}")
     public void deleteMission(@PathVariable Long id){
         missionsService.deleteMissionById(id);
     }
+
 }
