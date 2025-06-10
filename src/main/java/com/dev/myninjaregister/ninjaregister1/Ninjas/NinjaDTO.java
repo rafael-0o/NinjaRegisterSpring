@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class NinjaDTO {
-    
     private Long id;
     private String name;
     private String email;
