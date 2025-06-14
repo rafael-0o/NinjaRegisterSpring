@@ -7,13 +7,14 @@ import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table (name="tb_ninja_register")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-
+@ToString(exclude = "mission")
 public class NinjaModel {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

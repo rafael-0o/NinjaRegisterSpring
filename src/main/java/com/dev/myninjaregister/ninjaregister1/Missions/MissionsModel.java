@@ -6,8 +6,10 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.List;
+import lombok.ToString;
 
+import java.util.List;
+@ToString
 @Entity
 @Table(name="tb_missions")
 @NoArgsConstructor
