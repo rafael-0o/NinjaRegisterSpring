@@ -3,6 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <title>Table of ninjas list</title>
+    <style>
+        /* Reset e Estilos Gerais */
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding: 2rem;
+        }
+
+        /* Container Principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Estilos da Tabela */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 20px 0;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Cabeçalho da Tabela */
+        thead {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        /* Corpo da Tabela */
+        tbody tr {
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f3ff;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        td {
+            padding: 12px 15px;
+            vertical-align: middle;
+        }
+
+        /* Estilos para células específicas */
+        td:first-child {
+            font-weight: 600;
+            color: #2575fc;
+        }
+
+        /* Estilos para a seção de missão */
+        td:nth-child(6) {
+            font-size: 0.9rem;
+        }
+
+        td:nth-child(6) span {
+            display: block;
+            margin: 3px 0;
+        }
+
+        /* Botões de Ação */
+        td:last-child {
+            white-space: nowrap;
+        }
+
+        a {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-right: 8px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        a[href*="delete"] {
+            background-color: #ff4757;
+            color: white;
+        }
+
+        a[href*="delete"]:hover {
+            background-color: #ff6b81;
+        }
+
+        a[href*="details"] {
+            background-color: #2ed573;
+            color: white;
+        }
+
+        a[href*="details"]:hover {
+            background-color: #7bed9f;
+        }
+
+        a:not([href*="delete"]):not([href*="details"]) {
+            background-color: #3498db;
+            color: white;
+        }
+
+        a:not([href*="delete"]):not([href*="details"]):hover {
+            background-color: #70a1ff;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+        }
+
+        /* Efeitos visuais extras */
+        tbody tr {
+            position: relative;
+        }
+
+        tbody tr::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to bottom, #6a11cb, #2575fc);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        tbody tr:hover::after {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
 <table>
@@ -14,6 +177,8 @@
         <th>age</th>
         <th>rank</th>
         <th>mission</th>
+        <th>create new <a th:href="@{/api/ninjas/ui/create}"> create</a></th>
+
     </tr>
     </thead>
     <tbody>
@@ -22,7 +187,16 @@
             <td th:text="${ninja.name}"></td>
             <td th:text="${ninja.email}"></td>
             <td th:text="${ninja.age}"></td>
-            <td th:text="${ninja.mission}"></td>
+            <td th:text="${ninja.rank}"></td>
+            <td>
+                <span th:if="${ninja.mission}"><span th:text="${ninja.mission.name}"></span>Dificullty: <span th:text="${ninja.mission.difficulty}"></span></span>
+                <span th:if="${ninja.mission==null}">Don't have missions</span>
+            </td>
+            <td>
+                <a th:href="@{/api/ninjas/ui/showbyid/{id}(id=${ninja.id})}">Show details</a>
+                <a th:href="@{/api/ninjas/ui/create}">Update</a>
+                <a th:href="@{/api/ninjas/ui/deletebyid/{id}(id=${ninja.id})}">Delete</a>
+            </td>
         </tr>
     </tbody>
 </table>
