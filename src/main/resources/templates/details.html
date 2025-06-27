@@ -125,6 +125,17 @@
             color: rgba(255, 126, 95, 0.3);
             animation: shuriken 3s linear infinite;
         }
+        a {
+                display: inline-block;
+                padding: 6px 12px;
+                margin-right: 8px;
+                border-radius: 4px;
+                text-decoration: none;
+                font-size: 0.85rem;
+                font-weight: 500;
+                transition: all 0.2s ease;
+
+        }
     </style>
 </head>
 <body>
@@ -135,13 +146,14 @@
     <p><strong>Rank:</strong> <span th:text="${ninjas.rank}"></span></p>
     <p> <strong>Id:</strong> <span th:text="${ninjas.id}"></span></p>
     <p> <strong>Mission:</strong>
-        <span th:if="${ninjas.mission}"><span th:text="${ninjas.mission.name}"><br></span>
-            Id: <span th:text="${ninjas.mission.id}"><br></span>
-            Dificullty: <span th:text="${ninjas.mission.difficulty}"><br></span>
+        <span th:if="${ninjas.mission}"><span th:text="${ninjas.mission.name}"></span><br>
+            Mission Id: <span th:text="${ninjas.mission.id}"></span><br>
+            Mission Dificullty: <span th:text="${ninjas.mission.difficulty}"></span>
         </span>
         <span th:if="${ninjas.mission==null}">Don't have missions</span>
     </p>
-
+    <a th:href="@{/api/ninjas/ui/showall}">Go back</a>
 </div>
+
 </body>
 </html>

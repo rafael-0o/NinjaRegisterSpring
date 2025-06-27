@@ -1,9 +1,6 @@
 package com.dev.myninjaregister.ninjaregister1.Ninjas;
 
 
-import com.dev.myninjaregister.ninjaregister1.Common.Response.GenericAnswer;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -52,6 +49,19 @@ public class NinjaControllerUI {
     public String saveNinja(@ModelAttribute NinjaDTO ninja, RedirectAttributes redirectAttributes){
         ninjaService.createNewNinja(ninja);
         redirectAttributes.addFlashAttribute("Mensage","Ninja Created");
+        return "redirect:/api/ninjas/ui/showall";
+    }
+
+    @GetMapping("/update/{id}")
+    public String ninjaFormsUp(Model model,@PathVariable Long id){
+        model.addAttribute("ninja",ninjaService.showNinjaById(id));
+        return  "updateninja";
+    }
+
+    @PutMapping("/saveup/{id}")
+    public String saveUpdate(@PathVariable Long id,@ModelAttribute NinjaDTO ninja, RedirectAttributes redirectAttributes){
+        ninjaService.alterNinja(id, ninja);
+        redirectAttributes.addFlashAttribute("Mensage", "Ninja updated");
         return "redirect:/api/ninjas/ui/showall";
     }
 
