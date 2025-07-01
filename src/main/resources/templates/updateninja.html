@@ -181,18 +181,18 @@
     <form th:action="@{/api/ninjas/ui/saveup/{id}(id=${ninja.id})}" th:object="${ninja}" method="post">
         <input type="hidden" name="_method" value="put"/>
         <!-- 1. - Define que este é um campo oculto, ou seja: `type="hidden"`
-    - Não é visível para o usuário na página
-    - Não pode ser editado diretamente pelo usuário
-    - Está presente no DOM(É como uma árvore que representa todos os elementos de uma página web
-    Ex: Head, body, div) mas não é renderizado visualmente
+        - Não é visível pra o usuário na página
+        - Não pode ser editado diretamente pelo usuário
+        - Está presente no DOM(É como uma árvore que representa todos os elementos de uma página web
+        Ex: Head, body, div) mas não é renderizado visualmente
 
-    Este campo trabalha em conjunto com o `HiddenHttpMethodFilter` (que está configurado no seu ) para
-    permitir que o formulário HTML envie requisições PUT, mesmo que o navegador só suporte nativamente
+    Este campo trabalha em conjunto com o `HiddenHttpMethodFilter` (que está configurado no seu WebConfig)
+     para permitir que o formulário HTML envie requisições PUT, mesmo que o navegador só suporte nativamente
     GET e POST. Quando o formulário é enviado: `WebConfig.java`
-1. O navegador envia uma requisição POST
-2. O `HiddenHttpMethodFilter` intercepta a requisição
-3. Lê o valor do campo `_method`
-4. Converte internamente a requisição POST para uma requisição PUT
+    1  . O navegador envia uma requisição POST
+    2. O `HiddenHttpMethodFilter` intercepta a requisição
+    3. Lê o valor do campo `_method`
+    4. Converte internamente a requisição POST para uma requisição PUT
          -->
         <input type="hidden" th:field="*{id}"/>
         <!--

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create a new mission</title>
+</head>
+<body>
+<div>
+    <h1>Create a mission</h1>
+    <form th:action="@{/api/missions/ui/save}" th:object="${mission}" method="post">
+        <label for="name">Mission name:</label>
+        <input type="text" id="name" th:field="*{name}" required>
+        <label for="difficulty">Mission difficulty:</label>
+        <input type="text" id="difficulty" th:field="*{difficulty}" required>
+        <button type="submit">Submit mission</button>
+    </form>
+    <a th:href="@{/api/missions/ui/showall}">return</a>
+</div>
+</body>
+</html>
